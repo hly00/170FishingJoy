@@ -10,7 +10,7 @@ typedef enum{
 	k_Fish_Type_PufferS,
 	k_Fish_Type_Bream,
 	k_Fish_Type_Progy,
-	
+	k_Fish_Type_Count,
 	k_Fish_Type_Chelonian,	
 	k_Fish_Type_Lantern,
 	k_Fish_Type_Ray,
@@ -22,7 +22,6 @@ typedef enum{
 	k_Fish_Type_JadePerch,
 	k_Fish_Type_MarlineFish,
 	k_Fish_Type_PufferB,
-	k_Fish_Type_Count,
 }FishType;
 
 

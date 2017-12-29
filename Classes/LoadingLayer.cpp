@@ -44,9 +44,9 @@ bool LoadingLayer::init()
 void LoadingLayer::initProgressBar()
 {
 	CCSprite* progressBg = CCSprite::create("loading_4-ipadhd.png");
-	_progressFg = CCLabelTTF::create("0/100", "Thonburi", 65);
+	_progressFg = CCLabelTTF::create("0/100", "Thonburi", 50);
 
-	_progressFg->setColor(ccc3(255, 255, 255));
+	_progressFg->setColor(ccc3(255, 255, 0));
 
 	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
 

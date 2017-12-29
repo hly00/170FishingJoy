@@ -29,16 +29,6 @@ public:
 
 	void scheduleTimeUp();
 
-	void pause(CCObject *sender);
-	void resume();
-	void music();
-
-	void reset();
-
-	void mainMenu();
-
-	CC_SYNTHESIZE_READONLY(CCMenu*, _menu, Menu);
-
 protected:
 	BackgroundLayer* _backgroundLayer;
 	FishLayer* _fishLayer;
@@ -46,12 +36,10 @@ protected:
 	CannonLayer* _cannonLayer;
 	TouchLayer* _touchLayer;
 	PanelLayer* _panelLayer;
-	CCSprite* _pauseSprite;
 	bool checkOutCollisionBetweenFishesAndBullet(Bullet* bullet);
 	void checkOutCollision();
 	virtual void update(float delta);
 	void fishWillBeCaught(Fish* fish);
 	void alterGold(int delta);
 	void checkOutCollisionBetweenFishesAndFishingNet(Bullet* bulet);
-	void operateAllSchedulerAndActions(CCNode* node, OperateFlag flag);
 };

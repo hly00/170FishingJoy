@@ -8,9 +8,9 @@ class ScheduleCountDown :
 	public CCNode
 {
 public:
-	static ScheduleCountDown* create(ScheduleCounterDelegate* target, int perimeter = 600, bool loop = true);
+	static ScheduleCountDown* create(ScheduleCounterDelegate* target, int perimeter = 60, bool loop = true);
 
-	bool init (ScheduleCounterDelegate* target, int perimeter = 600, bool loop = true);
+	bool init (ScheduleCounterDelegate* target, int perimeter = 60, bool loop = true);
 
 	CC_SYNTHESIZE(bool, _loop, Loop);
 

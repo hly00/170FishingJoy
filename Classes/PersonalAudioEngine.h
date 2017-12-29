@@ -15,5 +15,4 @@ public:
 	static PersonalAudioEngine* sharedEngine();
 	
 	bool init();
-	void setBackgroundMusic(bool flag);
 };

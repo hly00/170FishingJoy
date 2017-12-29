@@ -1,7 +1,6 @@
 #include "GameScene.h"
 #include "FishingJoyData.h"
 #include "PersonalAudioEngine.h"
-#include "GameMenuLayer.h"
 
 GameScene::GameScene()
 {
@@ -42,23 +41,7 @@ bool GameScene::init()
 		_panelLayer->getGoldCounter()->setNumber(gold);
 
 		this->scheduleUpdate();
-
-		CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-
-		CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("UI_GameMenuLayer-ipadhd.plist");
-
-		_pauseSprite = CCSprite::createWithSpriteFrameName("ui_button_02.png");
-		 
-		CCMenuItemSprite* pause = CCMenuItemSprite::create(_pauseSprite, 
-			_pauseSprite, this, menu_selector(GameScene::pause));
-
-		_menu = CCMenu::create(pause, NULL);
-		this->addChild(_menu);
-
-		CCSize pauseSize = pause->getContentSize();
-		_menu->setPosition(CCPointMake(winSize.width-pauseSize.width, winSize.height - pauseSize.height));
 		
-		FishingJoyData::sharedFishingJoyData()->setMusic(true);
 		PersonalAudioEngine::sharedEngine()->playBackgroundMusic("music_1.mp3", true);
 		return true;
 	} while (0);
@@ -165,82 +148,4 @@ void GameScene::alterGold(int delta)
 void GameScene::scheduleTimeUp()
 {
 	this->alterGold(200);
-}
-
-void GameScene::pause(CCObject *sender)
-{
-	PersonalAudioEngine::sharedEngine()->pauseBackgroundMusic();
-
-	PersonalAudioEngine::sharedEngine()->playEffect("bgm_button.aif");
-
-	this->operateAllSchedulerAndActions(this, k_Operate_Pause);
-
-	_touchLayer->setTouchEnabled(false);
-
-	_menu->setTouchEnabled(false);
-
-	this->addChild(_menuLayer);
-}
-
-void GameScene::resume()
-{
-	this->operateAllSchedulerAndActions(this, k_Operate_Resume);
-
-	FishingJoyData::sharedFishingJoyData()->getMusic() ? PersonalAudioEngine::sharedEngine()->resumeBackgroundMusic() : PersonalAudioEngine::sharedEngine()->pauseBackgroundMusic();
-
-	this->removeChild(_menuLayer, false);
-
-	_touchLayer->setTouchEnabled(true);
-
-	_menu->setTouchEnabled(true);
-}
-
-void GameScene::music()
-{
-	PersonalAudioEngine::sharedEngine()->setBackgroundMusic(FishingJoyData::sharedFishingJoyData()->getMusic());
-}
-
-void GameScene::reset()
-{
-	FishingJoyData::sharedFishingJoyData()->reset();
-
-	_panelLayer->getGoldCounter()->setNumber(FishingJoyData::sharedFishingJoyData()->getGold());
-
-	this->_cannonLayer->getWeapon()->getCannon()->setType(k_Cannon_Type_1);
-
-	this->resume();
-}
-
-void GameScene::mainMenu()
-{
-	PersonalAudioEngine::sharedEngine()->pauseBackgroundMusic();
-	CCDirector::sharedDirector()->replaceScene(GameMenuLayer::scene());
-}
-
-void GameScene::operateAllSchedulerAndActions(CCNode* node, OperateFlag flag)
-{
-	if(node->isRunning()){
-		switch (flag) {
-		case k_Operate_Pause:
-			node->pauseSchedulerAndActions();
-			break;
-		case k_Operate_Resume:
-			node->resumeSchedulerAndActions();
-			break;
-		default:
-			break;
-		}
-
-		CCArray* children = node->getChildren();
-
-		if(children != NULL && children->count()>0){
-
-			CCObject* item;
-
-			CCARRAY_FOREACH(children, item){
-				CCNode* child = (CCNode*)item;
-				this->operateAllSchedulerAndActions(child, flag);
-			}
-		}
-	}
 }

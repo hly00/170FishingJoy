@@ -30,9 +30,3 @@ bool PersonalAudioEngine::init()
 
 	return true;
 }
-
-void PersonalAudioEngine::setBackgroundMusic(bool flag)
-{
-	flag ? this->pauseBackgroundMusic() : this->resumeBackgroundMusic();
-	FishingJoyData::sharedFishingJoyData()->setMusic(!flag);
-}

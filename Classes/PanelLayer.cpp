@@ -26,7 +26,7 @@ bool PanelLayer::init()
 
 	ScheduleCountDown* countDown = ScheduleCountDown::create(this);
 
-	_scheduleLabel = CCLabelTTF::create("600", "Thonburi", 55);
+	_scheduleLabel = CCLabelTTF::create("60", "Thonburi", 55);
 	_scheduleLabel->setColor(ccc3(255, 0, 0));
 	_scheduleLabel->addChild(countDown);
 	this->addChild(_scheduleLabel);
